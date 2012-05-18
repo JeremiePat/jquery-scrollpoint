@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jQuery scrollPoint test</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="jQuery.scrollPoint.js"></script>
+	<script>
+$(function() {
+	var pitch = 50;
+
+	// Bind an element with a scroll zone
+	$("#toFixed").scrollPoint({
+		up   : $('#col').offset().top - pitch,
+		down : $('#col').offset().top - pitch + $('#col').height() - $('#toFixed').height()
+	})
+	
+	// Event when the scroll offset enter the scroll zone
+	$(document).on('scrollPointEnter', '#toFixed', function() {
+		$(this).css({
+			position:"fixed",
+			top: pitch
+		})
+	})
+	
+	// Event when the scroll offset leave the scroll zone
+	$(document).on('scrollPointLeave', '#toFixed', function() {
+		var TOP = $(window).scrollTop() <= $('#col').offset().top ? 
+		          0 : 
+		          $('#col').height() - $('#toFixed').height();
+	
+		$(this).css({
+			position:"absolute",
+			top: TOP
+		})
+	})
+	
+	// Event trigger each time you scroll to now if you are in or out the zone
+	$(document).on('scrollPointMove', '#toFixed', function(e) {
+		$(this).css({
+			"background-color" : (e.isIn ? "green" : "red")
+		});
+	});
+});
+	</script>
+	
+	<style>
+body{
+	padding: 2em;
+	margin: 0;
+	font: 1em sans-serif;
+}
+
+#page {
+	width: 600px;
+	margin: 0 auto;
+}
+
+#col{
+	position: relative;
+	width:100px;
+	height: 600px;
+	border: 1px solid red;
+	float: left;
+	margin: 0 1em 1em 0
+}
+
+#toFixed {
+	width:100px;
+	height: 100px;
+	background: black;
+}
+	</style>
+</head>
+
+<body>
+<div id="page">
+	<p>Cupcake ipsum dolor sit amet brownie soufflé donut ice cream. Marzipan muffin I love gummi bears chocolate bar. Jelly beans carrot cake candy canes bear claw icing. Pie candy applicake caramels bonbon lollipop pudding marzipan. Macaroon ice cream oat cake pastry pastry. I love chupa chups pie donut. Chocolate bar caramels pie dessert apple pie sweet roll I love sesame snaps. Donut bear claw I love powder fruitcake sesame snaps topping. Dessert chocolate cake chupa chups. Lemon drops apple pie applicake cookie marshmallow sweet cheesecake. Marshmallow carrot cake applicake fruitcake chocolate cake dragée faworki. Powder gummies macaroon candy I love marzipan.</p>
+	<div id="col">
+		<div id="toFixed"></div>
+	</div>
+	<p>Tart tart wypas jujubes tiramisu. Muffin chocolate chocolate bar wafer sweet roll toffee I love. Icing I love gummi bears candy canes donut jelly-o bonbon soufflé. Dragée tootsie roll chocolate bar lollipop oat cake donut tootsie roll applicake. Ice cream sugar plum oat cake jelly-o marzipan bear claw cupcake. Biscuit jelly pie chocolate cake sugar plum cotton candy liquorice tiramisu pudding. Caramels jelly-o danish danish lollipop. Dessert I love lollipop faworki. Chocolate jelly beans croissant I love macaroon. I love I love danish wypas tootsie roll. Sesame snaps I love chupa chups lollipop cupcake jelly-o. Pie danish fruitcake chupa chups.</p>
+	<p>Dessert gummies applicake cupcake icing. Jelly I love dessert bonbon cookie. Bonbon wypas gingerbread I love I love croissant toffee. Gummies gummi bears chocolate cake I love. I love sugar plum cheesecake soufflé. Tootsie roll halvah jelly-o faworki cheesecake sweet topping icing. I love faworki jelly beans. Caramels soufflé I love pastry chocolate bar chocolate cookie chocolate bar dessert. Tiramisu fruitcake candy canes sweet roll I love croissant faworki. Dragée wafer marshmallow jujubes bonbon. I love jelly beans powder wypas brownie chocolate cake apple pie tart. Gummies ice cream oat cake muffin. Topping cookie candy canes I love tiramisu toffee bear claw cake. Lemon drops fruitcake gummi bears I love cotton candy dragée.</p>
+	<p>Topping apple pie soufflé applicake topping danish. Fruitcake sugar plum I love candy canes sugar plum chocolate cake toffee chocolate. Donut wypas gummies biscuit. Chupa chups wafer jujubes bear claw chupa chups. I love dragée I love jelly beans sugar plum I love candy canes. Carrot cake donut I love lollipop topping. Powder croissant sweet faworki toffee. Sugar plum sweet roll caramels dessert. Caramels gummies sugar plum cookie sugar plum I love sweet. Chocolate bar applicake pudding wafer I love applicake danish halvah cotton candy. Dragée powder jelly I love macaroon chocolate. Gingerbread halvah I love halvah. Biscuit gummies applicake. Wafer I love I love jelly-o.</p>
+	<p>Tootsie roll pudding lemon drops brownie ice cream croissant gummi bears. Powder icing marzipan sesame snaps I love chocolate bar. Cookie brownie lollipop gingerbread muffin lemon drops icing oat cake. I love I love icing muffin gummi bears. Jelly cheesecake powder I love marzipan. I love pastry candy canes muffin apple pie candy canes gingerbread tart danish. Gingerbread candy I love candy. I love I love tootsie roll lollipop chocolate bar liquorice cheesecake cotton candy. Donut faworki carrot cake. Tootsie roll sweet roll gummi bears oat cake I love brownie chocolate bar apple pie. Marshmallow marshmallow tart pie brownie carrot cake biscuit jelly beans lollipop. Wypas jelly beans candy canes dessert jujubes icing muffin wypas. Wafer I love jelly-o bonbon halvah dessert halvah cheesecake.</p>
+	<p>Tart tart wypas jujubes tiramisu. Muffin chocolate chocolate bar wafer sweet roll toffee I love. Icing I love gummi bears candy canes donut jelly-o bonbon soufflé. Dragée tootsie roll chocolate bar lollipop oat cake donut tootsie roll applicake. Ice cream sugar plum oat cake jelly-o marzipan bear claw cupcake. Biscuit jelly pie chocolate cake sugar plum cotton candy liquorice tiramisu pudding. Caramels jelly-o danish danish lollipop. Dessert I love lollipop faworki. Chocolate jelly beans croissant I love macaroon. I love I love danish wypas tootsie roll. Sesame snaps I love chupa chups lollipop cupcake jelly-o. Pie danish fruitcake chupa chups.</p>
+	<p>Dessert gummies applicake cupcake icing. Jelly I love dessert bonbon cookie. Bonbon wypas gingerbread I love I love croissant toffee. Gummies gummi bears chocolate cake I love. I love sugar plum cheesecake soufflé. Tootsie roll halvah jelly-o faworki cheesecake sweet topping icing. I love faworki jelly beans. Caramels soufflé I love pastry chocolate bar chocolate cookie chocolate bar dessert. Tiramisu fruitcake candy canes sweet roll I love croissant faworki. Dragée wafer marshmallow jujubes bonbon. I love jelly beans powder wypas brownie chocolate cake apple pie tart. Gummies ice cream oat cake muffin. Topping cookie candy canes I love tiramisu toffee bear claw cake. Lemon drops fruitcake gummi bears I love cotton candy dragée.</p>
+	<p>Topping apple pie soufflé applicake topping danish. Fruitcake sugar plum I love candy canes sugar plum chocolate cake toffee chocolate. Donut wypas gummies biscuit. Chupa chups wafer jujubes bear claw chupa chups. I love dragée I love jelly beans sugar plum I love candy canes. Carrot cake donut I love lollipop topping. Powder croissant sweet faworki toffee. Sugar plum sweet roll caramels dessert. Caramels gummies sugar plum cookie sugar plum I love sweet. Chocolate bar applicake pudding wafer I love applicake danish halvah cotton candy. Dragée powder jelly I love macaroon chocolate. Gingerbread halvah I love halvah. Biscuit gummies applicake. Wafer I love I love jelly-o.</p>
+	<p>Tootsie roll pudding lemon drops brownie ice cream croissant gummi bears. Powder icing marzipan sesame snaps I love chocolate bar. Cookie brownie lollipop gingerbread muffin lemon drops icing oat cake. I love I love icing muffin gummi bears. Jelly cheesecake powder I love marzipan. I love pastry candy canes muffin apple pie candy canes gingerbread tart danish. Gingerbread candy I love candy. I love I love tootsie roll lollipop chocolate bar liquorice cheesecake cotton candy. Donut faworki carrot cake. Tootsie roll sweet roll gummi bears oat cake I love brownie chocolate bar apple pie. Marshmallow marshmallow tart pie brownie carrot cake biscuit jelly beans lollipop. Wypas jelly beans candy canes dessert jujubes icing muffin wypas. Wafer I love jelly-o bonbon halvah dessert halvah cheesecake.</p>
+
+</div>
+</body>
+</html>

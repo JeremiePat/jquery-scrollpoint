@@ -39,7 +39,7 @@
             }
             
             if (!down && down !== 0) {
-                down = element.offset().top + element.height();
+                down = up + element.height();
             }
     
             $window.scroll(function() {

@@ -21,6 +21,8 @@
 
 (function($){
     $.fn.scrollPoint = function( params ) {
+        var $window = $(window);
+        
         params = $.extend({
             up: false,
             down: false
@@ -31,7 +33,6 @@
                 down = params.down,
                 isIn = false,
                 element = $(this),
-                $window = $(window),
                 hasStarted = false;
             
             if (!up && up !== 0) {
@@ -41,9 +42,9 @@
             if (!down && down !== 0) {
                 down = up + element.height();
             }
-    
-            $window.scroll(function() {
-                var Event = $.Event("scrollPointMove"),
+            
+            function checkScroll() {
+            	var Event = $.Event("scrollPointMove"),
                     pos = $window.scrollTop(),
                     oldIn = isIn;
                 
@@ -63,7 +64,9 @@
                 
                 Event.isIn = isIn;
                 element.trigger(Event);
-            });
+            }
+    
+            $window.scroll(checkScroll);
         });
     };
 })(jQuery);

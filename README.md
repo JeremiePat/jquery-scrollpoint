@@ -6,7 +6,7 @@ A jQuery plugin to define and interact with scroll zones.
 Defining a scroll zone
 ----------------------
 
-To bind an element with a scroll zone, just do the following :
+To bind an element with a scroll zone, you can use the ``up`` and ``down`` parameters :
 
 ```javascript
 jQuery('#foo').scrollPoint({
@@ -29,6 +29,17 @@ jQuery('#foo').scrollPoint({
     down : jQuery('#foo').offset().top + jQuery('#foo').height()
 });
 ```
+
+It's possible to shift an implicit scroll zone by using the ``offsetUp`` and ``offsetDown`` parameters :
+
+```javascript
+jQuery('#foo').scrollPoint({
+    offsetUp   : $(window).height() / 3,
+    offsetDown : $(window).height() / 3
+});
+```
+
+Without those parameters, the _Enter_ and _Leave_ events will be triggered when the top and the bottom of the element will reach the top of the viewport. With those two parameters, the two events will be triggered when the top and the bottom of the elements will reach the first top third of the viewport.
 
 Using events
 ------------

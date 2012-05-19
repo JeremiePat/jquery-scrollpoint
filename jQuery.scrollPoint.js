@@ -22,14 +22,16 @@
 (function($){
     $.fn.scrollPoint = function( params ) {
         params = $.extend({
-            up: 0,
-            down: 0
+            up: this.offset().top,
+            down: this.offset().top + this.height()
         }, params);
         
         return this.each(function() {
-            var element = $(this),
+            var up = params.up,
+                down = params.down,
+                isIn = false,
+                element = $(this),
                 $window = $(window),
-                isIn = false;
                 hasStarted = false;
     
             $window.scroll(function() {
@@ -37,7 +39,7 @@
                     pos = $window.scrollTop(),
                     oldIn = isIn;
                 
-                isIn = pos >= params.up && pos <= params.down;
+                isIn = pos >= up && pos <= down;
                 
                 if(oldIn !== isIn) {
                     if(!hasStarted && isIn) {

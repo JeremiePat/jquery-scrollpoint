@@ -19,58 +19,60 @@
     THE SOFTWARE.
 */
 
-(function($){
-    $.fn.scrollPoint = function( params ) {
+(function ($) {
+    'use strict';
+
+    $.fn.scrollPoint = function (params) {
         var $window = $(window);
-        
+
         params = $.extend({
             up         : false,
             down       : false,
             offsetUp   : 0,
-            offsetDown : 0,
+            offsetDown : 0
         }, params);
-        
-        return this.each(function() {
-            var up = params.up,
-                down = params.down,
-                isIn = false,
-                element = $(this),
+
+        return this.each(function () {
+            var up         = params.up,
+                down       = params.down,
+                isIn       = false,
+                element    = $(this),
                 hasStarted = false;
-            
+
             if (!up && up !== 0) {
                 up = element.offset().top;
             }
-            
+
             if (!down && down !== 0) {
                 down = up + element.height();
             }
-            
-            up -= params.offsetUp;
+
+            up   -= params.offsetUp;
             down -= params.offsetDown;
-            
+
             function checkScroll() {
-            	var pos = $window.scrollTop(),
+                var pos   = $window.scrollTop(),
                     Event = $.Event("scrollPointMove"),
                     oldIn = isIn;
-                
+
                 isIn = pos >= up && pos <= down;
-                
-                if(oldIn !== isIn) {
-                    if(!hasStarted && isIn) {
+
+                if (oldIn !== isIn) {
+                    if (!hasStarted && isIn) {
                         hasStarted = true;
                         element.trigger("scrollPointEnter");
                     }
-                
+
                     if (hasStarted && !isIn) {
                         hasStarted = false;
                         element.trigger("scrollPointLeave");
                     }
                 }
-                
+
                 Event.isIn = isIn;
                 element.trigger(Event);
             }
-    
+
             $window.scroll(checkScroll);
         });
     };

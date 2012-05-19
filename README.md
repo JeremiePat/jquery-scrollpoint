@@ -37,11 +37,11 @@ Each time the window scroll position reach or leave a defined scroll zone, all t
 
 3 kind of events are triggered :
 
-* scrollPointEnter  
+* ``scrollPointEnter``  
   When the scroll position enter the defined scroll zone.
-* scrollPointLeave  
+* ``scrollPointLeave``  
   When the scroll position leave the defined scroll zone.
-* scrollPointMove  
+* ``scrollPointMove``  
   Each time you scroll to say if the scroll position is in or out the scroll zone.
 
 You can use those events as usual :
@@ -57,9 +57,9 @@ jQuery(document).on("scrollPointLeave", "#foo", function(event) {
 
 jQuery(document).on("scrollPointMove", "#foo", function(event) {
     if (event.isIn) {
-        /* Do whatever you want when you are inside the scroll zone watches by #foo */
+        /* Do whatever you want while you scroll inside the scroll zone watches by #foo */
     } else {
-        /* Do whatever you want when you are outside the scroll zone watches by #foo */
+        /* Do whatever you want while you scroll outside the scroll zone watches by #foo */
     }
 });
 ```

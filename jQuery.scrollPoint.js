@@ -24,8 +24,10 @@
         var $window = $(window);
         
         params = $.extend({
-            up: false,
-            down: false
+            up         : false,
+            down       : false,
+            offsetUp   : 0,
+            offsetDown : 0,
         }, params);
         
         return this.each(function() {
@@ -43,9 +45,12 @@
                 down = up + element.height();
             }
             
+            up -= params.offsetUp;
+            down -= params.offsetDown;
+            
             function checkScroll() {
-            	var Event = $.Event("scrollPointMove"),
-                    pos = $window.scrollTop(),
+            	var pos = $window.scrollTop(),
+                    Event = $.Event("scrollPointMove"),
                     oldIn = isIn;
                 
                 isIn = pos >= up && pos <= down;

@@ -22,8 +22,8 @@
 (function($){
     $.fn.scrollPoint = function( params ) {
         params = $.extend({
-            up: this.offset().top,
-            down: this.offset().top + this.height()
+            up: false,
+            down: false
         }, params);
         
         return this.each(function() {
@@ -33,6 +33,14 @@
                 element = $(this),
                 $window = $(window),
                 hasStarted = false;
+            
+            if (!up && up !== 0) {
+                up = element.offset().top;
+            }
+            
+            if (!down && down !== 0) {
+                down = element.offset().top + element.height();
+            }
     
             $window.scroll(function() {
                 var Event = $.Event("scrollPointMove"),

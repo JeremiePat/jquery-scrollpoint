@@ -44,7 +44,7 @@
             }
 
             if (!down && down !== 0) {
-                down = up + element.height();
+                down = up + element.outerHeight();
             }
 
             up   -= params.offsetUp;

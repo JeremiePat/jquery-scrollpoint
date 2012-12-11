@@ -26,10 +26,10 @@ $(function() {
 	})
 	
 	// Event when the scroll offset leave the scroll zone
-	$(document).on('scrollPointLeave', '#toFixed', function() {
+	$(document).on('scrollPointLeave', '#toFixed', function( event ) {
 		var TOP = 0
 		
-		if ($(window).scrollTop() > $('#col').offset().top) { 
+		if ( event.isDown ) { 
 		    TOP = $('#col').outerHeight() - $('#toFixed').outerHeight();
 		}
 	

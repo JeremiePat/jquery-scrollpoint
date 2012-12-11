@@ -14,7 +14,7 @@ $(function() {
 	// Bind an element with a scroll zone
 	$("#toFixed").scrollPoint({
 		up   : $('#col').offset().top - pitch,
-		down : $('#col').offset().top - pitch + $('#col').height() - $('#toFixed').height(),
+		down : $('#col').offset().top - pitch + $('#col').outerHeight() - $('#toFixed').outerHeight(),
 	})
 	
 	// Event when the scroll offset enter the scroll zone
@@ -30,7 +30,7 @@ $(function() {
 		var TOP = 0
 		
 		if ($(window).scrollTop() > $('#col').offset().top) { 
-		    TOP = $('#col').height() - $('#toFixed').height();
+		    TOP = $('#col').outerHeight() - $('#toFixed').outerHeight();
 		}
 	
 		$(this).css({
@@ -80,7 +80,8 @@ body{
 
 #toFixed {
 	width:100px;
-	height: 100px;
+	height: 50px;
+	padding-top: 50px;
 	background: black;
 }
 

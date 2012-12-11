@@ -51,26 +51,33 @@
             down -= params.offsetDown;
 
             function checkScroll() {
-                var pos   = $window.scrollTop(),
-                    Event = $.Event("scrollPointMove"),
-                    oldIn = isIn;
-
-                isIn = pos >= up && pos <= down;
+                var pos    = $window.scrollTop(),
+                    oldIn  = isIn,
+                    isUp   = pos <= up,
+                    isDown = pos >= down,
+                    triggerEvent = function( eventType ) {
+                        var Event = $.Event(eventType);
+                        Event.isIn = isIn;
+                        Event.isUp = isUp;
+                        Event.isDown = isDown;
+                        element.trigger(Event);
+                    };
+                
+                isIn = ! isUp && ! isDown;
 
                 if (oldIn !== isIn) {
                     if (!hasStarted && isIn) {
                         hasStarted = true;
-                        element.trigger("scrollPointEnter");
+                        triggerEvent("scrollPointEnter");
                     }
 
                     if (hasStarted && !isIn) {
                         hasStarted = false;
-                        element.trigger("scrollPointLeave");
+                        triggerEvent("scrollPointLeave");
                     }
                 }
 
-                Event.isIn = isIn;
-                element.trigger(Event);
+                triggerEvent("scrollPointMove");
             }
 
             $window.scroll(checkScroll);

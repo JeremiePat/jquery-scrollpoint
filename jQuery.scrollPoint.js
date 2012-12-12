@@ -35,6 +35,8 @@
         return this.each(function () {
             var up         = params.up,
                 down       = params.down,
+                isUp       = true,
+                isDown     = false,
                 isIn       = false,
                 element    = $(this),
                 hasStarted = false;
@@ -50,27 +52,35 @@
             up   -= params.offsetUp;
             down -= params.offsetDown;
 
+            function triggerEvent(eventType) {
+                var Event    = $.Event(eventType);
+                Event.isIn   = isIn;
+                Event.isUp   = isUp;
+                Event.isDown = isDown;
+                element.trigger(Event);
+            };
+
             function checkScroll() {
                 var pos   = $window.scrollTop(),
-                    Event = $.Event("scrollPointMove"),
                     oldIn = isIn;
 
-                isIn = pos >= up && pos <= down;
+                isUp   = pos <= up;
+                isDown = pos >= down;
+                isIn   = ! isUp && ! isDown;
 
                 if (oldIn !== isIn) {
                     if (!hasStarted && isIn) {
                         hasStarted = true;
-                        element.trigger("scrollPointEnter");
+                        triggerEvent("scrollPointEnter");
                     }
 
                     if (hasStarted && !isIn) {
                         hasStarted = false;
-                        element.trigger("scrollPointLeave");
+                        triggerEvent("scrollPointLeave");
                     }
                 }
 
-                Event.isIn = isIn;
-                element.trigger(Event);
+                triggerEvent("scrollPointMove");
             }
 
             $window.scroll(checkScroll);

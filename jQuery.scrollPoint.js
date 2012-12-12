@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2012
+    Copyright (c) 2012 Jeremie Patonnier
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
     in the Software without restriction, including without limitation the rights
@@ -35,8 +35,6 @@
         return this.each(function () {
             var up         = params.up,
                 down       = params.down,
-                isUp       = true,
-                isDown     = false,
                 isIn       = false,
                 element    = $(this),
                 hasStarted = false;
@@ -52,35 +50,40 @@
             up   -= params.offsetUp;
             down -= params.offsetDown;
 
-            function triggerEvent(eventType) {
-                var Event    = $.Event(eventType);
-                Event.isIn   = isIn;
-                Event.isUp   = isUp;
-                Event.isDown = isDown;
+            function triggerEvent(eventType, eventParams) {
+                var n, Event = $.Event(eventType);
+
+                for(n in eventParams) {
+                    Event[n] = eventParams[n];
+                }
+
                 element.trigger(Event);
-            };
+            }
 
             function checkScroll() {
                 var pos   = $window.scrollTop(),
-                    oldIn = isIn;
+                    oldIn = isIn,
+                    param = {
+                        isUp   : pos <= up,
+                        isDown : pos >= down,
+                        isIn   : false
+                    };
 
-                isUp   = pos <= up;
-                isDown = pos >= down;
-                isIn   = ! isUp && ! isDown;
+                isIn = param.isIn = !param.isUp && !param.isDown;
 
                 if (oldIn !== isIn) {
                     if (!hasStarted && isIn) {
                         hasStarted = true;
-                        triggerEvent("scrollPointEnter");
+                        triggerEvent("scrollPointEnter", param);
                     }
 
                     if (hasStarted && !isIn) {
                         hasStarted = false;
-                        triggerEvent("scrollPointLeave");
+                        triggerEvent("scrollPointLeave", param);
                     }
                 }
 
-                triggerEvent("scrollPointMove");
+                triggerEvent("scrollPointMove", param);
             }
 
             $window.scroll(checkScroll);

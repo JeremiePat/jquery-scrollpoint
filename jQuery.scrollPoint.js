@@ -36,8 +36,7 @@
             var up         = params.up,
                 down       = params.down,
                 isIn       = false,
-                element    = $(this),
-                hasStarted = false;
+                element    = $(this);
 
             if (!up && up !== 0) {
                 up = element.offset().top;
@@ -72,15 +71,7 @@
                 isIn = param.isIn = !param.isUp && !param.isDown;
 
                 if (oldIn !== isIn) {
-                    if (!hasStarted && isIn) {
-                        hasStarted = true;
-                        triggerEvent("scrollPointEnter", param);
-                    }
-
-                    if (hasStarted && !isIn) {
-                        hasStarted = false;
-                        triggerEvent("scrollPointLeave", param);
-                    }
+                    triggerEvent("scrollPoint" + (isIn ? "Enter" : "Leave"), param);
                 }
 
                 triggerEvent("scrollPointMove", param);

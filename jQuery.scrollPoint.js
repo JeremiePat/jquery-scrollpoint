@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2012 Jeremie Patonnier
+    Copyright (c) 2014 Jeremie Patonnier
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
     in the Software without restriction, including without limitation the rights
@@ -35,7 +35,11 @@
         return this.each(function () {
             var up         = params.up,
                 down       = params.down,
-                isIn       = false,
+                relativePos  = {
+                    isUp   : true,
+                    isDown : false,
+                    isIn   : false
+                },
                 element    = $(this);
 
             if (!up && up !== 0) {
@@ -61,20 +65,17 @@
 
             function checkScroll() {
                 var pos   = $window.scrollTop(),
-                    oldIn = isIn,
-                    param = {
-                        isUp   : pos <= up,
-                        isDown : pos >= down,
-                        isIn   : false
-                    };
-
-                isIn = param.isIn = !param.isUp && !param.isDown;
-
-                if (oldIn !== isIn) {
-                    triggerEvent("scrollPoint" + (isIn ? "Enter" : "Leave"), param);
+                    oldRelativePos = $.extend({}, relativePos);
+                
+                relativePos.isUp   = pos <= up;
+                relativePos.isDown = pos >= down;
+                relativePos.isIn   = !relativePos.isUp && !relativePos.isDown;
+                
+                if (oldRelativePos.isIn !== relativePos.isIn || oldRelativePos.isUp !== relativePos.isUp) {
+                    triggerEvent("scrollPoint" + (relativePos.isIn ? "Enter" : "Leave"), relativePos);
                 }
 
-                triggerEvent("scrollPointMove", param);
+                triggerEvent("scrollPointMove", relativePos);
             }
 
             $window.scroll(checkScroll);

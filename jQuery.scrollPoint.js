@@ -72,6 +72,10 @@
                 relativePos.isIn   = !relativePos.isUp && !relativePos.isDown;
                 
                 if (oldRelativePos.isIn !== relativePos.isIn || oldRelativePos.isUp !== relativePos.isUp) {
+                    // If the scroll jumped directly between isUp and isDown
+                    if (oldRelativePos.isIn === relativePos.isIn) {
+                        triggerEvent("scrollPointEnter", relativePos);
+                    }
                     triggerEvent("scrollPoint" + (relativePos.isIn ? "Enter" : "Leave"), relativePos);
                 }
 

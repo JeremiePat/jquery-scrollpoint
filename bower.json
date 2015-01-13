@@ -1,0 +1,16 @@
+{
+  "name": "scrollpoint",
+  "description": "A jQuery plugin to define and interact with scroll zones.",
+  "main": "jQuery.scrollPoint.js",
+  "authors": [
+    "Jeremie Patonnier",
+    "Thomas Zilliox"
+  ],
+  "ignore": [
+    "**/*.md",
+    "**/*.html"
+  ],
+  "dependencies": {
+    "jquery": ">=1.9.0"
+  }
+}

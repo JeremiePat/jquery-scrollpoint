@@ -1,5 +1,5 @@
 {
-  "name": "scrollpoint",
+  "name": "jquery-scrollpoint",
   "description": "A jQuery plugin to define and interact with scroll zones.",
   "main": "jQuery.scrollPoint.js",
   "authors": [

@@ -1,0 +1,27 @@
+{
+  "name": "jquery-scrollpoint",
+  "version": "1.0.2",
+  "description": " A jQuery plugin to define and interact with scrolling zones",
+  "main": "jQuery.scrollPoint.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeremiePat/jquery-scrollpoint.git"
+  },
+  "keywords": [
+    "scroll",
+    "sticky",
+    "jquery"
+  ],
+  "author": [
+    "Jeremie Patonnier (http://jeremie.patonnier.net)",
+    "Thomas Zilliox (http://tzi.fr)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JeremiePat/jquery-scrollpoint/issues"
+  },
+  "homepage": "https://github.com/JeremiePat/jquery-scrollpoint#readme"
+}

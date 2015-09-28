@@ -1,4 +1,4 @@
-jQuery scrollPoint
+jquery-scrollpoint
 ==================
 
 A jQuery plugin to define and interact with scroll zones.
@@ -74,3 +74,8 @@ jQuery(document).on("scrollPointMove", "#foo", function(event) {
     }
 });
 ```
+
+Authors and license
+------------
+jquery-scrollpoint is licensed under the [MIT license](http://opensource.org/licenses/MIT).
+It was created by Jeremie Patonnier.

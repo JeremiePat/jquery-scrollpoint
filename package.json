@@ -2,7 +2,7 @@
   "name": "jquery-scrollpoint",
   "version": "1.0.2",
   "description": " A jQuery plugin to define and interact with scrolling zones",
-  "main": "jQuery.scrollPoint.js",
+  "main": "jquery.scrollpoint.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
